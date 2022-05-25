@@ -19,8 +19,6 @@ function textInside() {
   });
   stdin.on('data', (chunk) => {
     let smthText = chunk.toString();
-    //console.log(chunk);
-    //console.log(smthText);
     if (smthText.trim() !== 'exit') {
       fs.appendFile(file, smthText, (err) => {
         if(err) throw err;
