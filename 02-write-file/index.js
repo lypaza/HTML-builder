@@ -19,7 +19,9 @@ function textInside() {
   });
   stdin.on('data', (chunk) => {
     let smthText = chunk.toString();
-    if (smthText !== 'exit\n') {
+    //console.log(chunk);
+    //console.log(smthText);
+    if (smthText.trim() !== 'exit') {
       fs.appendFile(file, smthText, (err) => {
         if(err) throw err;
         console.log('Ввод добавлен в text.txt');
