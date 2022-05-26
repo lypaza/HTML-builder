@@ -24,7 +24,7 @@ async function readFile(arr, result) {
         const dataFile = await fs.promises.readFile(pathOrigFile, {encoding: 'utf-8'});
         console.log(filesOrig + ' записан в массив\n');
         result += dataFile;
-        deleteOldBundle();
+        //deleteOldBundle();
         createNewBundle(result);
       }
     }
@@ -32,14 +32,14 @@ async function readFile(arr, result) {
 }
 
 
-async function deleteOldBundle() {
+/*async function deleteOldBundle() {
   let unlinkStyle = path.join(__dirname, '.', 'project-dist');
   fs.promises.readdir(unlinkStyle, {withFileTypes: true})
     .then(filenames => {
       for (let filename of filenames) {
         let StyleFilepath = path.join(__dirname, './project-dist', filename.name);
         if (path.extname(filename.name) == '.css') {
-          fs.unlink(StyleFilepath, () => {
+          fs.promises.writeFile(StyleFilepath, () => {
             console.log('Бандл актуализирован\n');
           });
         }
@@ -48,12 +48,12 @@ async function deleteOldBundle() {
     .catch(err => {
       console.log(err);
     });
-}
+}*/
 
 async function createNewBundle(data) {
   fs.open(dirBundle, 'a', (err) => {
     if(err) throw err;
-    fs.appendFile(dirBundle, data, (err) => {
+    fs.promises.writeFile(dirBundle, data, (err) => {
       if(err) throw err;
       console.log('Сделана запись в бандл\n');
     });
